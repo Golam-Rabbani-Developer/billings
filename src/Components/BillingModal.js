@@ -11,6 +11,7 @@ import { UserContext } from '../App';
 const BillingModal = ({ billing, setBilling, refetch, editItem, setEditItem }) => {
     const [user, setUser] = useContext(UserContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const config = `Bearer ${localStorage.getItem('token')}`
 
     const onSubmit = async (data) => {
 

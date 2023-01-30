@@ -11,6 +11,7 @@ import { useContext } from 'react';
 
 // internal import 
 import { UserContext } from '../App';
+import setAuthToken from '../utilitis/setAuthToken';
 
 
 const Registration = (props) => {
@@ -22,7 +23,7 @@ const Registration = (props) => {
 
     useEffect(() => {
         if (user._id) {
-            navigate('/');
+            navigate('/billings');
             toast.success('Welcome to Power-Hack');
         }
     }, [user, navigate])
@@ -34,6 +35,7 @@ const Registration = (props) => {
                 if (res.data.message) {
                     localStorage.setItem('token', res.data.token)
                     setUser(jwt_decode(res.data.token))
+                    setAuthToken(res.data.token)
                     reset()
                 } else {
                     toast.warn('Sorry For This Issues Try again Later')
@@ -133,7 +135,7 @@ const Registration = (props) => {
                         </label>
                     </div>
 
-                    <p className='text-center'>New to ArBank ?<Link className='text-decoration-none text-red-500' to="/register"> Please Register</Link></p>
+                    <p className='text-center'>Already Registered ?<Link className='text-decoration-none text-red-500' to="/login"> Please Login</Link></p>
                     <input className='btn bg-red-800 border-none w-full mt-5 rounded-sm' type="submit" value="Register" />
                 </form>
             </div>

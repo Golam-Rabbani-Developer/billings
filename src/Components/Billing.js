@@ -1,28 +1,31 @@
 // exteranl import 
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
+import { FaLongArrowAltLeft } from 'react-icons/fa'
 
 
 // internal import 
 import BillingModal from './BillingModal';
 import Loading from './Loading';
+import Pagination from './Pagination';
 
 const Billing = ({ setTotalBillings }) => {
-    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [billing, setBilling] = useState({})
     const [editItem, setEditItem] = useState({})
     const [searchtext, setSearchtext] = useState('')
     const [searchedBillings, setSearchBillings] = useState([])
-
+    const [page, setPage] = useState(0)
 
     const { isLoading, error, data: billings, refetch } = useQuery('billings', () =>
-        fetch('http://localhost:5000/api/billing-list').then(res =>
+        fetch(`http://localhost:5000/api/billing-list?page=${page}`).then(res =>
             res.json()
         ))
+
 
     if (billings?.total) {
         setTotalBillings(billings?.total)
@@ -124,6 +127,8 @@ const Billing = ({ setTotalBillings }) => {
 
                     </tbody>
                 </table>
+
+                <Pagination page={page} setPage={setPage}></Pagination>
             </div>
         </div >
     );

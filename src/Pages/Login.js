@@ -19,7 +19,7 @@ const Login = (props) => {
         axios.post(`http://localhost:5000/api/users/login`, { data })
             .then(res => {
                 if (res.data.message) {
-                    navigate('/');
+                    navigate('/billings');
                     toast.success('Welcome to Power-Hack');
                     reset();
                 } else {
@@ -29,7 +29,7 @@ const Login = (props) => {
     };
     return (
         <div className='login'>
-            <div className='flex items-center flex-col justify-center w-[430px] mx-auto p-10 border rounded-md mt-40'>
+            <div className='flex items-center flex-col justify-center w-[430px] mx-auto p-10 border rounded-md mt-10'>
                 <img width="50px" src="https://i.ibb.co/XzhVF9g/TEPCO-Power-Grid-symbol-svg-removebg-preview-1.png" alt="company_logo" />
                 <h2 className='text-center font-bold'>Power-Hack</h2>
                 <h2 className='text-center text-red-500 text-2xl'>Login</h2>
@@ -70,8 +70,8 @@ const Login = (props) => {
                             {errors?.password?.type === 'required' && <span class="label-text-alt text-red-400 font-bold">{errors?.password?.message}</span>}
                         </label>
                     </div>
-                    <p className='text-center'>New to ArBank ?<Link className='text-decoration-none text-red-500' to="/register"> Please Register</Link></p>
-                    <input className='btn bg-red-800 border-none w-full mt-5 rounded-sm' type="submit" value="Register" />
+                    <p className='text-center'>New to Power-Hack ?<Link className='text-decoration-none text-red-500' to="/registration"> Please Register</Link></p>
+                    <input className='btn bg-red-800 border-none w-full mt-5 rounded-sm' type="submit" value="Login" />
                 </form>
             </div>
         </div>

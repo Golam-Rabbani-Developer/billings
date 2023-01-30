@@ -12,6 +12,9 @@ const Billings = () => {
 
                 <Billing setTotalBillings={setTotalBillings} />
             </div>
+            <div className='bg-gray-100 mt-16'>
+                <p className='text-sm text-center p-4 '>All Rights Reserved By Power-Hack</p>
+            </div>
         </>
     );
 };

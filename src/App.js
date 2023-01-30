@@ -6,26 +6,33 @@ import jwt_decode from "jwt-decode";
 import Registration from "./Pages/Registration";
 import { useState } from 'react';
 import Billings from './Pages/Billings';
+import setAuthToken from './utilitis/setAuthToken';
 
 
 
 export const UserContext = React.createContext('theme')
 
+const token = localStorage.getItem("token")
+
+if (token) {
+  setAuthToken(token)
+}
+
 function App() {
 
-  const token = localStorage.getItem("token")
 
   const [user, setUser] = useState((token && jwt_decode(token)) || {})
-  console.log(user)
+
 
   return (
     <UserContext.Provider value={[user, setUser]}>
 
       <div>
         <Routes>
-          <Route path='/' element={<Billings />} />
-          <Route path='/home' element={<Billings />} />
+          <Route path='/' element={<Login />} />
+          <Route path='/home' element={<Login />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/billings' element={<Billings />} />
           <Route path='/registration' element={<Registration />} />
         </Routes>
         <ToastContainer />
